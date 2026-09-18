@@ -268,7 +268,7 @@ footer .grow{margin-right:auto}
       <p class="par"><span class="tag">Approach</span>I built a transient lumped-parameter thermal model in Python covering five candidate mounting configurations, from a bare floating crystal to a water-cooled holder. Incident flux from the plasma was taken as 0.03 W/cm², and effective emissivity — by far the least certain input — was swept from 0.05 to 0.75 rather than assumed. I then built an independent 2-D axisymmetric finite-element model in COMSOL from the SolidWorks enclosure geometry and ran four of the configurations again, as a check on the lumped model rather than a repeat of it.</p>
       <p class="par"><span class="tag">Result</span>A floating crystal settles near 108 °C; light edge clamps hold it at 40 °C for a small conductive penalty, which is the configuration selected for the build. The two models agree to 0.4 °C on the clamped case and 1.6 °C on the floating case. They disagree by 4 °C on the sandwich-plate case, and the passive-mount FEA run was stopped at 15 s before it reached steady state — both are open, and both are shown below rather than left out. A smaller correction mattered too: a 6 MHz AT-cut crystal is 0.277 mm thick, not the 0.33 mm commonly quoted, and the thermal mass follows from that.</p>
       <figure>
-        <img src="images/qcm-model-crosscheck.png" alt="Crystal temperature against time after plasma ignition for four candidate mounts, plotted for both the Python lumped model and the COMSOL finite-element model.">
+        <img src="qcm-model-crosscheck.png" alt="Crystal temperature against time after plasma ignition for four candidate mounts, plotted for both the Python lumped model and the COMSOL finite-element model.">
         <figcaption>Crystal temperature after plasma ignition for four candidate mounts, from two independent models. Note the differing time axes: the mounts differ in settling time by more than an order of magnitude.</figcaption>
       </figure>
       <p class="tools"><span>Tools</span>Python · COMSOL Multiphysics · SolidWorks · vacuum system build-up</p>
@@ -283,16 +283,16 @@ footer .grow{margin-right:auto}
       <p class="par"><span class="tag">In measurement units</span>Converted into what the instrument would actually report, the drift stays below 0.3 nm of apparent aluminium through the first 5,000 s and reaches roughly 2.6 nm over a four-hour run. Short depositions are not thermally limited at all; only long ones need the compensation path built. The instruction this study produces is a finish specification rather than a mechanism: anodise the housing.</p>
       <figure>
         <div class="figrow">
-          <img src="images/qcm-field-eps010.png" alt="COMSOL steady-state temperature field of the housing at emissivity 0.1.">
-          <img src="images/qcm-field-eps030.png" alt="COMSOL steady-state temperature field of the housing at emissivity 0.3.">
-          <img src="images/qcm-field-eps080.png" alt="COMSOL steady-state temperature field of the housing at emissivity 0.8.">
+          <img src="qcm-field-eps010.png" alt="COMSOL steady-state temperature field of the housing at emissivity 0.1.">
+          <img src="qcm-field-eps030.png" alt="COMSOL steady-state temperature field of the housing at emissivity 0.3.">
+          <img src="qcm-field-eps080.png" alt="COMSOL steady-state temperature field of the housing at emissivity 0.8.">
         </div>
         <figcaption>Steady-state housing temperature at three aluminium emissivities, contact conductance 5,000 W/(m²·K). Left and right share one 20–130 °C scale; the centre frame is auto-scaled across 0.9 °C to show the crystal pocket above the housing.</figcaption>
       </figure>
       <figure>
         <div class="figrow">
-          <img src="images/qcm-emissivity-sweep.png" alt="Housing temperature plotted against aluminium emissivity from 0.05 to 0.8.">
-          <img src="images/qcm-phantom-al.png" alt="Apparent aluminium thickness from heat alone, plotted against time over a four-hour run.">
+          <img src="qcm-emissivity-sweep.png" alt="Housing temperature plotted against aluminium emissivity from 0.05 to 0.8.">
+          <img src="qcm-phantom-al.png" alt="Apparent aluminium thickness from heat alone, plotted against time over a four-hour run.">
         </div>
         <figcaption><b>Left:</b> housing temperature against emissivity. <b>Right:</b> the drift as apparent aluminium thickness, from heat alone.</figcaption>
       </figure>
@@ -320,8 +320,8 @@ footer .grow{margin-right:auto}
       <p class="par">The firmware initially set speed from the motor's K<sub>v</sub> rating, so before running any films I checked it: I swept the full range against a tachometer and recorded actual rotational speed, loaded and unloaded. The K<sub>v</sub> rating was not the speed. Measured rotation ran between 1,630 and 4,720 RPM above what the rating predicted, and the error was not a constant offset or a constant factor — it grew toward mid-range and then closed again, so nothing simple would have corrected it. I fitted the measured curve and inverted that fit in firmware, so a commanded 5,000 RPM now turns at 5,000 RPM and every process parameter in the recipe is a real speed rather than a nominal one. The rig's measured ceiling is roughly 8,900 RPM unloaded.</p>
       <figure>
         <div class="figrow">
-          <img src="images/spin-coater-rig.jpg" alt="Photograph of the deposition platform: linear stage, spin-coating head on the BLDC drive, syringe pump and control electronics.">
-          <img src="images/rpm-setpoint-vs-measured.png" alt="Measured rotational speed plotted against the speed predicted from the motor's Kv rating, showing a gap of up to 4,720 RPM.">
+          <img src="spin-coater-rig.jpg" alt="Photograph of the deposition platform: linear stage, spin-coating head on the BLDC drive, syringe pump and control electronics.">
+          <img src="rpm-setpoint-vs-measured.png" alt="Measured rotational speed plotted against the speed predicted from the motor's Kv rating, showing a gap of up to 4,720 RPM.">
         </div>
         <figcaption><b>Left:</b> the platform — (1) linear stage, (2) spin-coating head on the BLDC drive, (3) syringe pump, (4) control electronics. <b>Right:</b> speed predicted from the K<sub>v</sub> rating against measured speed. Inverting a fit through these points is what puts the drive back on the dashed line, where the commanded value is the actual one.</figcaption>
       </figure>
@@ -334,14 +334,14 @@ footer .grow{margin-right:auto}
       <p class="par">Two independent early checks, before any of the more involved metrology. Contact angle showed that wetting changed measurably against bare copper, so the surface had been modified. Weighing the substrate before and after deposition showed mass increasing with layer count out to 250 layers, which is the evidence that the platform accumulates material repeatably rather than depositing and stripping in equal measure.</p>
       <figure>
         <div class="figrow">
-          <img src="images/contact-angle.jpg" alt="Side-by-side droplets on a coated copper disc and a bare copper disc, showing different contact angles.">
-          <img src="images/mass-vs-layers.png" alt="Measured mass change plotted against number of deposited layers, rising from about 0.3 mg at 30 layers to about 2.3 mg at 250 layers.">
+          <img src="contact-angle.jpg" alt="Side-by-side droplets on a coated copper disc and a bare copper disc, showing different contact angles.">
+          <img src="mass-vs-layers.png" alt="Measured mass change plotted against number of deposited layers, rising from about 0.3 mg at 30 layers to about 2.3 mg at 250 layers.">
         </div>
         <figcaption><b>Left:</b> contact angle on a coated copper disc (left) against bare copper (right). <b>Right:</b> mass gain against layer count for early single-polymer films.</figcaption>
       </figure>
       <p class="par">Mixing the two solutions directly gave the reason the pair works: chitosan and xanthan gum form a visible complex polymer network, which is what makes them a viable alternating polycation/polyanion pair for layer-by-layer growth.</p>
       <figure>
-        <img src="images/ct-xg-network.jpg" alt="A chitosan and xanthan gum mixture compressed between microscope slides, showing a branching fibrous polymer network.">
+        <img src="ct-xg-network.jpg" alt="A chitosan and xanthan gum mixture compressed between microscope slides, showing a branching fibrous polymer network.">
         <figcaption>A CT/XG mixture compressed between microscope slides. The branching network is the polyelectrolyte complexation that the alternating deposition relies on.</figcaption>
       </figure>
 
@@ -349,14 +349,14 @@ footer .grow{margin-right:auto}
       <p class="par">SEM covered film coverage, cross-sectional thickness and the edge profile against the substrate. Early films showed non-uniform regions tied to copper surface roughness and substrate condition, which is what pushed the later work on substrate preparation. SEM-EDS separated well-coated from poorly coated regions: well-coated areas showed the elevated carbon and oxygen expected of an organic CT/XG film with the copper signal suppressed, while spectra from poorly coated regions showed the substrate coming through, mapping coverage variation spatially rather than by eye.</p>
       <figure>
         <div class="figrow">
-          <img src="images/sem-surface.jpg" alt="SEM surface image of a coated copper disc showing coating non-uniformity.">
-          <img src="images/sem-cross-section.jpg" alt="SEM cross-section of the film edge on the copper substrate.">
+          <img src="sem-surface.jpg" alt="SEM surface image of a coated copper disc showing coating non-uniformity.">
+          <img src="sem-cross-section.jpg" alt="SEM cross-section of the film edge on the copper substrate.">
         </div>
         <figcaption><b>Left:</b> surface morphology showing coating non-uniformity. <b>Right:</b> cross section at the film edge, showing the layer structure against the copper.</figcaption>
       </figure>
       <p class="par">Stylus profilometry gave the thickness ground truth and the surface topography. A 100-layer film measured 1.766 µm against its reference scan, which puts growth at roughly 11–18 nm per bilayer across the 30- and 100-layer stacks, consistent with published values for the same system. The scans put average roughness at S<sub>a</sub> = 2.49 nm and S<sub>q</sub> = 4.22 nm.</p>
       <figure>
-        <img src="images/profilometry-topography.png" alt="Three-dimensional profilometry scan of the film surface showing topography and roughness.">
+        <img src="profilometry-topography.png" alt="Three-dimensional profilometry scan of the film surface showing topography and roughness.">
         <figcaption>Profilometry scan of the film surface, giving both step height against a reference point and the overall topography.</figcaption>
       </figure>
 
@@ -364,32 +364,32 @@ footer .grow{margin-right:auto}
       <p class="par">Impedance spectroscopy on a Keysight E4990A from 20 Hz to 10 MHz, with samples mounted in a coin-cell style compression fixture with stainless electrodes. Coated substrates showed higher real impedance than bare copper — an added resistive barrier — and a stronger imaginary response, a capacitive and dielectric contribution.</p>
       <figure>
         <div class="figrow">
-          <img src="images/eis-real-film-vs-cu.png" alt="Real impedance against angular frequency for a coated substrate and for bare copper.">
-          <img src="images/eis-imag-film-vs-cu.png" alt="Imaginary impedance against angular frequency for a coated substrate and for bare copper.">
+          <img src="eis-real-film-vs-cu.png" alt="Real impedance against angular frequency for a coated substrate and for bare copper.">
+          <img src="eis-imag-film-vs-cu.png" alt="Imaginary impedance against angular frequency for a coated substrate and for bare copper.">
         </div>
         <figcaption>Real (left) and imaginary (right) impedance, coated substrate against bare copper. The film produces a measurable electrical signature in both components.</figcaption>
       </figure>
       <p class="par">Layer count moves both components, and it moves them by orders of magnitude rather than marginally — which is what connects deposition history to electrical behaviour, and what makes the number of layers a process knob rather than just a count.</p>
       <figure>
         <div class="figrow">
-          <img src="images/eis-real-layers.png" alt="Real impedance against angular frequency for films of 50, 100 and 200 layers.">
-          <img src="images/eis-imag-layers.png" alt="Imaginary impedance against angular frequency for films of 50, 100 and 200 layers.">
+          <img src="eis-real-layers.png" alt="Real impedance against angular frequency for films of 50, 100 and 200 layers.">
+          <img src="eis-imag-layers.png" alt="Imaginary impedance against angular frequency for films of 50, 100 and 200 layers.">
         </div>
         <figcaption>Real (left) and imaginary (right) impedance for films of 50, 100 and 200 layers. The traces separate strongly at low frequency and converge above roughly 10<sup>5</sup> rad s<sup>−1</sup>, consistent with increasing film thickness and altered interfacial transport.</figcaption>
       </figure>
       <p class="par">Converting the compensated impedance into material quantities gives complex conductivity and complex relative permittivity, which is where the film's own behaviour shows rather than the fixture's. For the soaked film, σ′ rises steadily with frequency across the full band, from below 0.5 × 10<sup>−4</sup> S m<sup>−1</sup> at the low end to about 5 × 10<sup>−4</sup> S m<sup>−1</sup> approaching 10<sup>8</sup> rad s<sup>−1</sup>.</p>
       <figure>
         <div class="figrow">
-          <img src="images/conductivity-real.png" alt="Real conductivity against angular frequency for the soaked film.">
-          <img src="images/conductivity-imag.png" alt="Imaginary conductivity against angular frequency for the soaked film.">
+          <img src="conductivity-real.png" alt="Real conductivity against angular frequency for the soaked film.">
+          <img src="conductivity-imag.png" alt="Imaginary conductivity against angular frequency for the soaked film.">
         </div>
         <figcaption>Complex conductivity of the soaked film across 20 Hz to 10 MHz — σ′ (left) and σ″ (right), converted from the compensated impedance using the fixture geometry.</figcaption>
       </figure>
       <p class="par">Permittivity is where hydration state shows most clearly. Dry films, films held in an 80% RH chamber and films soaked 10 minutes in RO water separate into three distinct curves, with the soaked film sitting orders of magnitude above the dry one at low frequency — water raises ionic mobility and changes how charge is stored and released at the interfaces. That is what pushed the soak-stability work below: a spectrum that moves this much with water is only meaningful if the film itself is still intact.</p>
       <figure>
         <div class="figrow">
-          <img src="images/permittivity-real.png" alt="Real relative permittivity against angular frequency for dry, humidity-exposed and soaked films.">
-          <img src="images/permittivity-imag.png" alt="Imaginary relative permittivity against angular frequency for dry, humidity-exposed and soaked films.">
+          <img src="permittivity-real.png" alt="Real relative permittivity against angular frequency for dry, humidity-exposed and soaked films.">
+          <img src="permittivity-imag.png" alt="Imaginary relative permittivity against angular frequency for dry, humidity-exposed and soaked films.">
         </div>
         <figcaption>Complex relative permittivity by hydration state — dry, humidity chamber, and a 10-minute soak. ε′ (left) and ε″ (right), both derived from the measured conductivity.</figcaption>
       </figure>
@@ -443,7 +443,7 @@ footer .grow{margin-right:auto}
       <p class="par"><span class="tag">Approach</span>Optical colour chart, DEKTAK stylus profilometry and spectroscopic ellipsometry disagreed. Rather than average them, I looked for evidence that did not come from any of the three. Two independent checks were available: the film's mass, weighed on the wafer before and after deposition, and the maximum capacitance of MIS devices built on the same film.</p>
       <p class="par"><span class="tag">Result</span>The ellipsometric value of 1000 Å is the one the independent evidence supports. At that thickness the measured 1.2 mg of film over the wafer area gives a density of 2.63 g/cm³, inside the 2.5–3.1 g/cm³ range reported for PECVD nitride; at 1800 Å it gives 1.46 g/cm³, below any published value for the material. The electrical check agrees: 1000 Å yields ε<sub>r</sub> = 6.2, within the usual 6–9 for PECVD SiN<sub>x</sub>, while 1800 Å would require 11.2. The profilometer was not wrong so much as answering a different question — RIE has finite nitride-to-silicon selectivity, so the exposed silicon was etched below the original surface and the measured step contains both the film and the recess beneath it. The useful outcome is not the number but the rule: a stylus measures a step, not a film, and the two are only the same when the etch stops where you think it did.</p>
       <figure>
-        <img src="images/thickness-methods.png" alt="Three measured thickness values on the same film plotted against the thickness range independently supported by mass and capacitance data.">
+        <img src="thickness-methods.png" alt="Three measured thickness values on the same film plotted against the thickness range independently supported by mass and capacitance data.">
         <figcaption>The three direct measurements against the thickness range that the mass and capacitance data independently support.</figcaption>
       </figure>
       <p class="tools"><span>Tools</span>Spectroscopic ellipsometry (Woollam alpha-SE) · DEKTAK stylus profilometry · reactive ion etch · gravimetric analysis</p>
@@ -456,7 +456,7 @@ footer .grow{margin-right:auto}
       <p class="par"><span class="tag">Approach</span>Complete flow: RCA clean, PECVD silicon nitride, contact photolithography, reactive ion etch, DC magnetron sputtered aluminium, wet etch. Then C–V at 1 MHz and I–V on nine devices in a cross-pattern, across five contact diameters and five wafer positions, so that area effects and spatial variation could be separated.</p>
       <p class="par"><span class="tag">Result</span>C<sub>max</sub> against contact area is linear to R² ≈ 1.00, giving ε<sub>r</sub> = 6.2. From C<sub>max</sub> = 39.8 pF and C<sub>min</sub> = 15.6 pF the substrate doping works out to N<sub>a</sub> ≈ 1.1 × 10¹⁶ cm⁻³, which lands inside the wafer's specified resistivity range — an independent confirmation that the extraction is sound. The interesting part is where the device is not ideal. Flatband sits near −20 V against an ideal −0.68 V, a shift of −19.3 V corresponding to a positive fixed charge density of 6.8 × 10¹² cm⁻² in the nitride, which is what SiH<sub>4</sub>/NH<sub>3</sub> PECVD film is expected to carry. Capacitance stayed within ±3% across the wafer and leakage below 10⁻¹⁰ A out to 20 V with no breakdown: a film with a lot of fixed charge, but a spatially uniform and electrically robust one. What stayed with me was how tightly the steps couple — what you accept at develop, you pay for at etch, and then again at extraction.</p>
       <figure>
-        <img src="images/cv-curve.png" alt="Capacitance–voltage characteristic of the 300 micrometre MIS device at 1 MHz, measured on two instruments.">
+        <img src="cv-curve.png" alt="Capacitance–voltage characteristic of the 300 micrometre MIS device at 1 MHz, measured on two instruments.">
         <figcaption>C–V characteristic of the 300 µm device at 1 MHz. The elevated capacitance through inversion, well above C<sub>min</sub>, is interface states fast enough to follow the 1 MHz signal.</figcaption>
       </figure>
       <p class="tools"><span>Tools</span>PECVD · DC magnetron sputtering · photolithography · reactive ion etch · C–V and I–V characterisation · four-point probe</p>
@@ -469,7 +469,7 @@ footer .grow{margin-right:auto}
       <p class="par"><span class="tag">Approach</span>Synthesised CdSe quantum dots, SPIONs, and europium- and dysprosium-doped phosphors, then built a spin-cast quantum-dot LED from the CdSe. Emission was tuned by controlling growth time alone, and I correlated image-derived size distributions against measured emission using the Brus model, with magnetic response treated through Néel and Brownian relaxation.</p>
       <p class="par"><span class="tag">Result</span>Closing the loop from particle size to device output is the part I care about — a spectrum on its own does not tell you whether you understand the material.</p>
       <figure>
-        <img src="images/qd-vials.jpg" alt="Six vials of CdSe quantum dots under UV excitation, emitting from blue through green and yellow to red.">
+        <img src="qd-vials.jpg" alt="Six vials of CdSe quantum dots under UV excitation, emitting from blue through green and yellow to red.">
         <figcaption>The CdSe size series under UV excitation. Every vial is the same chemistry; only growth time differs, and the emission moves across the visible with particle size.</figcaption>
       </figure>
       <p class="tools"><span>Tools</span>Colloidal synthesis · spin coating · photoluminescence · UV-Vis · PXRD · SEM</p>
