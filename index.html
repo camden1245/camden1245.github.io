@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Camden da Silva</title>
+<meta name="description" content="Engineering portfolio of Camden da Silva — nanofabrication, thin-film metrology and instrument design at the University of Waterloo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Charis+SIL:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+:root{
+  --ground:#F5F6F7;
+  --surface:#FFFFFF;
+  --ink:#14161A;
+  --muted:#5B6470;
+  --faint:#8B939E;
+  --rule:#DBDFE4;
+  --accent:#1A3658;
+  --accent-soft:#E7EDF4;
+  --shadow:0 1px 2px rgba(20,22,26,.05), 0 8px 24px -16px rgba(20,22,26,.18);
+  --serif:"Charis SIL", Charter, Georgia, "Times New Roman", serif;
+  --sans:"IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#101317;
+    --surface:#171B21;
+    --ink:#E7EAEE;
+    --muted:#A0A8B3;
+    --faint:#79828E;
+    --rule:#2A3039;
+    --accent:#8FB4DE;
+    --accent-soft:#1C2A3A;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#101317;
+  --surface:#171B21;
+  --ink:#E7EAEE;
+  --muted:#A0A8B3;
+  --faint:#79828E;
+  --rule:#2A3039;
+  --accent:#8FB4DE;
+  --accent-soft:#1C2A3A;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:16.5px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--accent);text-underline-offset:2px;text-decoration-thickness:.06em}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+/* ---------- top bar ---------- */
+.topbar{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:20;
+  background:color-mix(in srgb, var(--ground) 88%, transparent);
+  backdrop-filter:saturate(1.4) blur(8px);
+  border-bottom:1px solid var(--rule);
+}
+.topbar-inner{
+  max-width:1020px;margin:0 auto;
+  padding-block:.6rem;padding-left:24px;padding-right:24px;
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem 1.2rem;
+}
+.topbar .who{
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink);text-decoration:none;margin-right:auto;
+}
+.topbar nav{display:flex;flex-wrap:wrap;gap:.2rem 1.1rem}
+.topbar nav a{
+  font-size:.86rem;color:var(--muted);text-decoration:none;
+}
+.topbar nav a:hover{color:var(--accent)}
+
+/* ---------- page frame ---------- */
+.page{max-width:1020px;margin:0 auto;padding-left:24px;padding-right:24px;padding-block:0 4rem}
+.prose{max-width:68ch}
+
+/* ---------- masthead ---------- */
+.masthead{padding-block:4.5rem 3rem;border-bottom:1px solid var(--rule)}
+.masthead h1{
+  font-family:var(--serif);font-weight:700;
+  font-size:clamp(2.4rem,7vw,3.9rem);line-height:1.04;letter-spacing:-.005em;
+  margin:0 0 .5rem;color:var(--accent);text-wrap:balance;
+}
+.masthead .role{
+  font-family:var(--serif);font-style:italic;font-size:clamp(1.1rem,3vw,1.45rem);
+  color:var(--ink);margin:0 0 1.6rem;
+}
+.credentials{color:var(--muted);font-size:.97rem;margin:0 0 1.5rem}
+.credentials strong{color:var(--ink);font-weight:600}
+.contact{display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:center;font-size:.92rem}
+.contact a{
+  display:inline-block;padding:.34rem .8rem;border:1px solid var(--rule);border-radius:999px;
+  background:var(--surface);text-decoration:none;color:var(--ink);
+}
+.contact a:hover{border-color:var(--accent);color:var(--accent)}
+.contact a.primary{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.contact a.primary:hover{color:var(--surface);opacity:.9}
+
+/* ---------- section headings ---------- */
+.section{padding-block:3.4rem 0}
+.section-label{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--faint);margin:0 0 1.6rem;display:flex;align-items:center;gap:.9rem;
+}
+.section-label::after{content:"";flex:1;height:1px;background:var(--rule)}
+
+.intro p{margin:0;font-size:1.06rem}
+
+/* ---------- projects ---------- */
+.project{padding-block:2.6rem;border-top:1px solid var(--rule)}
+.project:first-of-type{border-top:none;padding-top:.4rem}
+.project h3{
+  font-family:var(--serif);font-weight:700;font-size:clamp(1.35rem,3.4vw,1.85rem);
+  line-height:1.2;margin:0 0 .35rem;color:var(--accent);text-wrap:balance;
+}
+.project .meta{
+  font-size:.88rem;color:var(--muted);margin:0 0 1.5rem;font-style:italic;
+  font-family:var(--serif);
+}
+.par{margin:0 0 1.15rem;max-width:68ch}
+.par .tag{
+  font-family:var(--sans);font-weight:600;font-size:.74rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--accent);margin-right:.55rem;
+  white-space:nowrap;
+}
+figure{margin:2rem 0 0;padding:1.1rem;background:var(--surface);border:1px solid var(--rule);border-radius:4px;box-shadow:var(--shadow)}
+figure img{margin:0 auto;border-radius:2px}
+.figrow{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));align-items:center}
+figcaption{
+  margin-top:.95rem;padding-top:.8rem;border-top:1px solid var(--rule);
+  font-size:.85rem;line-height:1.5;color:var(--muted);font-family:var(--serif);
+}
+figcaption b{color:var(--ink);font-weight:700}
+.tools{
+  margin:1.4rem 0 0;font-family:var(--mono);font-size:.79rem;line-height:1.7;
+  color:var(--muted);
+}
+.project h4{
+  font-family:var(--sans);font-size:.78rem;font-weight:600;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--ink);margin:2.3rem 0 .8rem;
+  padding-top:1.1rem;border-top:1px solid var(--rule);
+}
+.buildspec{
+  margin:0 0 1.2rem;display:grid;gap:.1rem 1.4rem;
+  grid-template-columns:minmax(9rem,max-content) 1fr;max-width:68ch;font-size:.95rem;
+}
+.buildspec dt{
+  font-family:var(--mono);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--faint);padding-top:.32rem;
+}
+.buildspec dd{margin:0 0 .5rem}
+.tablewrap{overflow-x:auto;margin:1.6rem 0 2rem}
+table.data{
+  border-collapse:collapse;font-size:.9rem;font-variant-numeric:tabular-nums;
+  min-width:26rem;background:var(--surface);
+}
+table.data caption{
+  caption-side:bottom;margin-top:.8rem;font-family:var(--serif);font-size:.85rem;
+  color:var(--muted);text-align:left;line-height:1.5;
+}
+table.data th,table.data td{padding:.42rem .95rem;border-bottom:1px solid var(--rule);text-align:right}
+table.data th:first-child,table.data td:first-child{text-align:left}
+table.data thead th{
+  font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);
+  font-weight:600;border-bottom:1.5px solid var(--rule);
+}
+table.data tbody tr:last-child td{border-bottom:1.5px solid var(--rule)}
+table.data .stable{color:var(--accent);font-weight:600}
+.tools span{
+  color:var(--faint);font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  margin-right:.5rem;
+}
+
+/* ---------- experience ---------- */
+.entry{padding-block:1.8rem;border-top:1px solid var(--rule)}
+.entry:first-of-type{border-top:none;padding-top:.2rem}
+.entry-head{display:flex;flex-wrap:wrap;gap:.2rem 1rem;align-items:baseline;justify-content:space-between}
+.entry-head h3{font-family:var(--sans);font-weight:600;font-size:1.06rem;margin:0}
+.entry-head .when{font-family:var(--mono);font-size:.8rem;color:var(--faint);white-space:nowrap}
+.entry .where{margin:.15rem 0 .8rem;font-size:.92rem;color:var(--muted);font-family:var(--serif);font-style:italic}
+.entry ul{margin:0;padding-left:1.15rem;max-width:72ch}
+.entry li{margin-bottom:.45rem}
+.entry li::marker{color:var(--faint)}
+
+/* ---------- skills ---------- */
+.skill{padding-block:1.1rem;border-top:1px solid var(--rule)}
+.skill:first-of-type{border-top:none;padding-top:.2rem}
+.skill h3{
+  font-family:var(--sans);font-size:.76rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 .4rem;
+}
+.skill p{margin:0;color:var(--ink);font-size:.97rem;max-width:80ch}
+.skill .sep{color:var(--faint);padding:0 .15rem}
+
+/* ---------- footer ---------- */
+footer{
+  margin-top:4rem;padding-block:2rem;border-top:1px solid var(--rule);
+  font-size:.9rem;color:var(--muted);
+  display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;align-items:baseline;
+}
+footer .grow{margin-right:auto}
+
+@media (max-width:620px){
+  .masthead{padding-block:3rem 2.4rem}
+  .page,.topbar-inner{padding-left:16px;padding-right:16px}
+  figure{padding:.75rem}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="who" href="#top">Camden da Silva</a>
+    <nav>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="portfolio.pdf">Portfolio&nbsp;PDF</a>
+    </nav>
+  </div>
+</div>
+
+<div class="page" id="top">
+
+  <header class="masthead">
+    <h1>Camden da Silva</h1>
+    <p class="role">Nanotechnology engineering — fabrication, metrology and the instruments behind both</p>
+    <p class="credentials">
+      <strong>BASc Nanotechnology Engineering, Honours Co-op</strong> · University of Waterloo<br>
+      Nanofabrication &amp; Nanoelectronics specialization · Expected 2028
+    </p>
+    <div class="contact">
+      <a class="primary" href="mailto:cdasilva@uwaterloo.ca">cdasilva@uwaterloo.ca</a>
+      <a href="https://www.linkedin.com/in/camden-da-silva-76164129b/">LinkedIn</a>
+      <a href="portfolio.pdf">Portfolio (PDF)</a>
+    </div>
+  </header>
+
+  <section class="section intro prose">
+    <h2 class="section-label">Why this work</h2>
+    <p>Most of what follows is hardware I specified, built and then had to debug. A spin-coating platform that drives a syringe pump and a closed-loop BLDC head in step, where the firmware was setting speed from a motor rating that turned out to be wrong by as much as 4,700 RPM. A resonant thin-film sensor whose analog front end was simulated as an equivalent circuit before any topology was chosen, and whose thermal design was settled by comparing five mounting configurations two independent ways. The rest of this page is semiconductor devices built by hand and the metrology used to decide whether to believe them. The thread running through all of it: in three of these projects the first answer the instrument gave was wrong, and the real work was finding out why.</p>
+  </section>
+
+  <section class="section" id="projects">
+    <h2 class="section-label">Projects</h2>
+
+    <article class="project">
+      <h3>Designing Out Thermal Drift in a Resonant Thin-Film Sensor</h3>
+      <p class="meta">Waterloo Hacker Fab — DC magnetron sputtering system · Spring 2026 – present</p>
+      <p class="par"><span class="tag">Problem</span>The sputtering system needs to know how thick a film is while it is growing. A quartz crystal microbalance infers deposited mass from a shift in the crystal's resonant frequency, which means anything else that changes the resonator — including radiant heat from the sputter head — is indistinguishable from deposition. A QCM that drifts does not fail visibly; it returns a confident wrong number. The mount had to be chosen before the sensor was built, because the mount is what sets how much of that heat reaches the crystal.</p>
+      <p class="par"><span class="tag">Approach</span>I built a transient lumped-parameter thermal model in Python covering five candidate mounting configurations, from a bare floating crystal to a water-cooled holder. Incident flux from the plasma was taken as 0.03 W/cm², and effective emissivity — by far the least certain input — was swept from 0.05 to 0.75 rather than assumed. I then built an independent 2-D axisymmetric finite-element model in COMSOL from the SolidWorks enclosure geometry and ran four of the configurations again, as a check on the lumped model rather than a repeat of it.</p>
+      <p class="par"><span class="tag">Result</span>A floating crystal settles near 108 °C; light edge clamps hold it at 40 °C for a small conductive penalty, which is the configuration selected for the build. The two models agree to 0.4 °C on the clamped case and 1.6 °C on the floating case. They disagree by 4 °C on the sandwich-plate case, and the passive-mount FEA run was stopped at 15 s before it reached steady state — both are open, and both are shown below rather than left out. A smaller correction mattered too: a 6 MHz AT-cut crystal is 0.277 mm thick, not the 0.33 mm commonly quoted, and the thermal mass follows from that.</p>
+      <figure>
+        <img src="images/qcm-model-crosscheck.png" alt="Crystal temperature against time after plasma ignition for four candidate mounts, plotted for both the Python lumped model and the COMSOL finite-element model.">
+        <figcaption>Crystal temperature after plasma ignition for four candidate mounts, from two independent models. Note the differing time axes: the mounts differ in settling time by more than an order of magnitude.</figcaption>
+      </figure>
+      <p class="tools"><span>Tools</span>Python · COMSOL Multiphysics · SolidWorks · vacuum system build-up</p>
+    </article>
+
+    <article class="project">
+      <h3>Thermal Drift, Continued — What the Design Is Actually Sensitive To</h3>
+      <p class="meta">Waterloo Hacker Fab — three-dimensional COMSOL parametric study · September 2026</p>
+      <p class="par"><span class="tag">Question</span>Choosing a mount answered one question and raised another: of all the numbers that went into that model, which ones does the answer actually depend on? Two of them are still open to whoever builds the thing. The surface finish of the aluminium housing sets how readily it radiates heat away, and the conductance across the crystal-to-holder interface is the least certain input in the model, being a fitted quantity rather than a datasheet value.</p>
+      <p class="par"><span class="tag">Approach</span>I rebuilt the enclosure as a full three-dimensional COMSOL model from the SolidWorks geometry, in place of the earlier axisymmetric slice, and swept both inputs: aluminium emissivity from 0.05 to 0.8, which spans bare polished aluminium at one end and an anodised finish at the other, and contact conductance from 200 to 5,000 W/(m²·K).</p>
+      <p class="par"><span class="tag">Result</span>Emissivity decides the design and nothing else comes close. Housing temperature falls from 122 °C at ε = 0.05 to 83 °C at 0.1, 46 °C at 0.3, and 31 °C at 0.8: a 91 °C span bought with a surface treatment. Most of it arrives early, since reaching ε = 0.3 removes 76 °C and the entire remaining range is worth another 15. Contact conductance, the input I was least sure of, turned out to matter least. A factor of twenty-five increase moves the housing by a few degrees at ε = 0.1 and by essentially nothing at 0.3, which is a useful thing to know before building, because it means the design does not rest on controlling an interface that is hard to control. The crystal tracks the housing closely, sitting about 0.9 °C above it, so housing temperature is the quantity worth designing against.</p>
+      <p class="par"><span class="tag">In measurement units</span>Converted into what the instrument would actually report, the drift stays below 0.3 nm of apparent aluminium through the first 5,000 s and reaches roughly 2.6 nm over a four-hour run. Short depositions are not thermally limited at all; only long ones need the compensation path built. The instruction this study produces is a finish specification rather than a mechanism: anodise the housing.</p>
+      <figure>
+        <div class="figrow">
+          <img src="images/qcm-field-eps010.png" alt="COMSOL steady-state temperature field of the housing at emissivity 0.1.">
+          <img src="images/qcm-field-eps030.png" alt="COMSOL steady-state temperature field of the housing at emissivity 0.3.">
+          <img src="images/qcm-field-eps080.png" alt="COMSOL steady-state temperature field of the housing at emissivity 0.8.">
+        </div>
+        <figcaption>Steady-state housing temperature at three aluminium emissivities, contact conductance 5,000 W/(m²·K). Left and right share one 20–130 °C scale; the centre frame is auto-scaled across 0.9 °C to show the crystal pocket above the housing.</figcaption>
+      </figure>
+      <figure>
+        <div class="figrow">
+          <img src="images/qcm-emissivity-sweep.png" alt="Housing temperature plotted against aluminium emissivity from 0.05 to 0.8.">
+          <img src="images/qcm-phantom-al.png" alt="Apparent aluminium thickness from heat alone, plotted against time over a four-hour run.">
+        </div>
+        <figcaption><b>Left:</b> housing temperature against emissivity. <b>Right:</b> the drift as apparent aluminium thickness, from heat alone.</figcaption>
+      </figure>
+      <p class="tools"><span>Tools</span>COMSOL Multiphysics (three-dimensional, parametric sweep) · SolidWorks · Python</p>
+    </article>
+
+    <article class="project">
+      <h3>Building and Testing an Automated Layer-by-Layer Spin Coater</h3>
+      <p class="meta">McGill University, Soft Matter Lab · Jan–Apr 2025; Sept 2025–Apr 2026 · Supervisor: Dr. Reghan J. Hill</p>
+      <p class="par"><span class="tag">Problem</span>The group's layer-by-layer deposition was done by hand, so repeatability was limited by whoever was doing it. It needed an instrument that produced the same film twice — and then it needed evidence that the films it produced were real, uniform, and electrically measurable.</p>
+
+      <h4>What I built</h4>
+      <p class="par">A full deposition platform for two-solution alternating layer-by-layer coating, specified and assembled from components, with the firmware written from scratch. One run automates stage motion, alternating solution positioning, syringe-pump triggering, spin-speed control and process timing — the five things that had previously depended on the operator.</p>
+      <dl class="buildspec">
+        <dt>Controller</dt><dd>Arduino Uno R3, with an OLED display for status and cycle progress</dd>
+        <dt>Motion</dt><dd>Linear stage driven by a TB6600 stepper driver, with a limit switch for homing</dd>
+        <dt>Spin head</dt><dd>BLDC motor and ESC on the spin platform</dd>
+        <dt>Dispensing</dt><dd>New Era syringe pump, TTL-triggered, with micro-tubing and dispensing tips</dd>
+        <dt>Power</dt><dd>12 V supply in a dedicated electronics enclosure</dd>
+        <dt>Firmware</dt><dd>Arduino C/C++ — main control logic, OLED screen logic, and icon data in PROGMEM</dd>
+      </dl>
+      <p class="par">A run homes the stage against the limit switch, moves to the neutral position, primes the pump with pulsed triggering, then for each layer steps to solution position A or B, ramps the motor to deposition speed, pulses the pump while the substrate spins, returns to neutral, lets the droplet spread, ramps to a higher speed to drive off excess, and ramps back down. Positions A and B alternate to build the multilayer, and the stage re-homes periodically to correct drift. Substrates were copper discs polished to roughly a 0.3 µm finish; reused discs went through an ethanol sonication and a brief acidified-peroxide oxide strip before coating.</p>
+
+      <h4>Calibrating the drive — the number the firmware trusted was wrong</h4>
+      <p class="par">The firmware initially set speed from the motor's K<sub>v</sub> rating, so before running any films I checked it: I swept the full range against a tachometer and recorded actual rotational speed, loaded and unloaded. The K<sub>v</sub> rating was not the speed. Measured rotation ran between 1,630 and 4,720 RPM above what the rating predicted, and the error was not a constant offset or a constant factor — it grew toward mid-range and then closed again, so nothing simple would have corrected it. I fitted the measured curve and inverted that fit in firmware, so a commanded 5,000 RPM now turns at 5,000 RPM and every process parameter in the recipe is a real speed rather than a nominal one. The rig's measured ceiling is roughly 8,900 RPM unloaded.</p>
+      <figure>
+        <div class="figrow">
+          <img src="images/spin-coater-rig.jpg" alt="Photograph of the deposition platform: linear stage, spin-coating head on the BLDC drive, syringe pump and control electronics.">
+          <img src="images/rpm-setpoint-vs-measured.png" alt="Measured rotational speed plotted against the speed predicted from the motor's Kv rating, showing a gap of up to 4,720 RPM.">
+        </div>
+        <figcaption><b>Left:</b> the platform — (1) linear stage, (2) spin-coating head on the BLDC drive, (3) syringe pump, (4) control electronics. <b>Right:</b> speed predicted from the K<sub>v</sub> rating against measured speed. Inverting a fit through these points is what puts the drive back on the dashed line, where the commanded value is the actual one.</figcaption>
+      </figure>
+
+      <h4>Finding the process window</h4>
+      <p class="par">With the drive calibrated I established the process window by structured sweeps over speed, dispense volume and drying. The settled protocol is 0.45 mL per deposition step, 3,000 RPM for 30 s to form the coating, then 6,500 RPM for 8 s to remove excess and stabilise drying — the same base recipe for both the chitosan and xanthan gum steps. An earlier recipe of 4,000 RPM for 25 s followed by 6,500 RPM for 20 s left finger-like drying patterns across the film; the settled recipe removed them. The solutions themselves took their own optimization: chitosan at 0.70% w/v in 1% w/v acetic acid and xanthan gum at 0.35% w/v in RO water, concentrations chosen for a viscosity range that spin-coats into a stable film without agglomeration.</p>
+      <p class="par">Long runs needed reliability features that only show up once you run hundreds of cycles: re-homing every 20 cycles, pulsed pump triggering rather than one long trigger, gradual motor ramps instead of abrupt steps, and staying out of the low nonzero RPM band where the motor runs unstably. Films were built at 10, 30, 50, 100, 150 and 250 layers.</p>
+
+      <h4>Confirming there was a film at all</h4>
+      <p class="par">Two independent early checks, before any of the more involved metrology. Contact angle showed that wetting changed measurably against bare copper, so the surface had been modified. Weighing the substrate before and after deposition showed mass increasing with layer count out to 250 layers, which is the evidence that the platform accumulates material repeatably rather than depositing and stripping in equal measure.</p>
+      <figure>
+        <div class="figrow">
+          <img src="images/contact-angle.jpg" alt="Side-by-side droplets on a coated copper disc and a bare copper disc, showing different contact angles.">
+          <img src="images/mass-vs-layers.png" alt="Measured mass change plotted against number of deposited layers, rising from about 0.3 mg at 30 layers to about 2.3 mg at 250 layers.">
+        </div>
+        <figcaption><b>Left:</b> contact angle on a coated copper disc (left) against bare copper (right). <b>Right:</b> mass gain against layer count for early single-polymer films.</figcaption>
+      </figure>
+      <p class="par">Mixing the two solutions directly gave the reason the pair works: chitosan and xanthan gum form a visible complex polymer network, which is what makes them a viable alternating polycation/polyanion pair for layer-by-layer growth.</p>
+      <figure>
+        <img src="images/ct-xg-network.jpg" alt="A chitosan and xanthan gum mixture compressed between microscope slides, showing a branching fibrous polymer network.">
+        <figcaption>A CT/XG mixture compressed between microscope slides. The branching network is the polyelectrolyte complexation that the alternating deposition relies on.</figcaption>
+      </figure>
+
+      <h4>Structure, coverage and composition</h4>
+      <p class="par">SEM covered film coverage, cross-sectional thickness and the edge profile against the substrate. Early films showed non-uniform regions tied to copper surface roughness and substrate condition, which is what pushed the later work on substrate preparation. SEM-EDS separated well-coated from poorly coated regions: well-coated areas showed the elevated carbon and oxygen expected of an organic CT/XG film with the copper signal suppressed, while spectra from poorly coated regions showed the substrate coming through, mapping coverage variation spatially rather than by eye.</p>
+      <figure>
+        <div class="figrow">
+          <img src="images/sem-surface.jpg" alt="SEM surface image of a coated copper disc showing coating non-uniformity.">
+          <img src="images/sem-cross-section.jpg" alt="SEM cross-section of the film edge on the copper substrate.">
+        </div>
+        <figcaption><b>Left:</b> surface morphology showing coating non-uniformity. <b>Right:</b> cross section at the film edge, showing the layer structure against the copper.</figcaption>
+      </figure>
+      <p class="par">Stylus profilometry gave the thickness ground truth and the surface topography. A 100-layer film measured 1.766 µm against its reference scan, which puts growth at roughly 11–18 nm per bilayer across the 30- and 100-layer stacks, consistent with published values for the same system. The scans put average roughness at S<sub>a</sub> = 2.49 nm and S<sub>q</sub> = 4.22 nm.</p>
+      <figure>
+        <img src="images/profilometry-topography.png" alt="Three-dimensional profilometry scan of the film surface showing topography and roughness.">
+        <figcaption>Profilometry scan of the film surface, giving both step height against a reference point and the overall topography.</figcaption>
+      </figure>
+
+      <h4>Electrical behaviour of the films</h4>
+      <p class="par">Impedance spectroscopy on a Keysight E4990A from 20 Hz to 10 MHz, with samples mounted in a coin-cell style compression fixture with stainless electrodes. Coated substrates showed higher real impedance than bare copper — an added resistive barrier — and a stronger imaginary response, a capacitive and dielectric contribution.</p>
+      <figure>
+        <div class="figrow">
+          <img src="images/eis-real-film-vs-cu.png" alt="Real impedance against angular frequency for a coated substrate and for bare copper.">
+          <img src="images/eis-imag-film-vs-cu.png" alt="Imaginary impedance against angular frequency for a coated substrate and for bare copper.">
+        </div>
+        <figcaption>Real (left) and imaginary (right) impedance, coated substrate against bare copper. The film produces a measurable electrical signature in both components.</figcaption>
+      </figure>
+      <p class="par">Layer count moves both components, and it moves them by orders of magnitude rather than marginally — which is what connects deposition history to electrical behaviour, and what makes the number of layers a process knob rather than just a count.</p>
+      <figure>
+        <div class="figrow">
+          <img src="images/eis-real-layers.png" alt="Real impedance against angular frequency for films of 50, 100 and 200 layers.">
+          <img src="images/eis-imag-layers.png" alt="Imaginary impedance against angular frequency for films of 50, 100 and 200 layers.">
+        </div>
+        <figcaption>Real (left) and imaginary (right) impedance for films of 50, 100 and 200 layers. The traces separate strongly at low frequency and converge above roughly 10<sup>5</sup> rad s<sup>−1</sup>, consistent with increasing film thickness and altered interfacial transport.</figcaption>
+      </figure>
+      <p class="par">Converting the compensated impedance into material quantities gives complex conductivity and complex relative permittivity, which is where the film's own behaviour shows rather than the fixture's. For the soaked film, σ′ rises steadily with frequency across the full band, from below 0.5 × 10<sup>−4</sup> S m<sup>−1</sup> at the low end to about 5 × 10<sup>−4</sup> S m<sup>−1</sup> approaching 10<sup>8</sup> rad s<sup>−1</sup>.</p>
+      <figure>
+        <div class="figrow">
+          <img src="images/conductivity-real.png" alt="Real conductivity against angular frequency for the soaked film.">
+          <img src="images/conductivity-imag.png" alt="Imaginary conductivity against angular frequency for the soaked film.">
+        </div>
+        <figcaption>Complex conductivity of the soaked film across 20 Hz to 10 MHz — σ′ (left) and σ″ (right), converted from the compensated impedance using the fixture geometry.</figcaption>
+      </figure>
+      <p class="par">Permittivity is where hydration state shows most clearly. Dry films, films held in an 80% RH chamber and films soaked 10 minutes in RO water separate into three distinct curves, with the soaked film sitting orders of magnitude above the dry one at low frequency — water raises ionic mobility and changes how charge is stored and released at the interfaces. That is what pushed the soak-stability work below: a spectrum that moves this much with water is only meaningful if the film itself is still intact.</p>
+      <figure>
+        <div class="figrow">
+          <img src="images/permittivity-real.png" alt="Real relative permittivity against angular frequency for dry, humidity-exposed and soaked films.">
+          <img src="images/permittivity-imag.png" alt="Imaginary relative permittivity against angular frequency for dry, humidity-exposed and soaked films.">
+        </div>
+        <figcaption>Complex relative permittivity by hydration state — dry, humidity chamber, and a 10-minute soak. ε′ (left) and ε″ (right), both derived from the measured conductivity.</figcaption>
+      </figure>
+
+      <h4>Separating the film from the instrument</h4>
+      <p class="par">The harder half of the electrical work was deciding which features belonged to the film and which to the measurement. I built and measured known RC circuits — a 10 kΩ + 10 nF series combination among them — as benchmarks, which exposed where the analyser and fixture stop behaving: real impedance holds near the expected resistor value across a central band, with deviations appearing at high frequency and, depending on the R and C values, at low frequency too. I then compared correction approaches on those known circuits: raw, open-short compensation in several formulations, and handbook-style open-short-load, scored by median percent error against the expected value.</p>
+      <div class="tablewrap">
+        <table class="data">
+          <caption>Median percent error across the spectrum for a known RC circuit, by correction method and measurement condition. Every method beats the raw data, but the ranking changes with the condition — which is why compensation was treated as condition-dependent rather than universally reliable.</caption>
+          <thead>
+            <tr><th>Method</th><th>Faraday cage</th><th>Faraday cage (no touch)</th><th>Open cage</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Raw</td><td>3.5061</td><td>3.1886</td><td>3.2256</td></tr>
+            <tr><td>Z<sub>u1</sub></td><td>0.9323</td><td>0.5260</td><td>0.4257</td></tr>
+            <tr><td>Z<sub>u2</sub></td><td>0.9391</td><td>0.4268</td><td>0.4257</td></tr>
+            <tr><td>Z<sub>u3</sub></td><td>0.7893</td><td>0.0624</td><td>0.2010</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="par">Alongside that I worked through the fixture itself: grounded Faraday enclosure, twisted leads and reduced loop area, keeping open, short and load at the same effective measurement plane, and minimising contact variability in the clips. The practical rule that came out of it is that compensation is only trustworthy when open, short and load are taken at the same true measurement plane — small changes in lead geometry or contact location make an aggressive correction unstable, and the more aggressive corrections were exactly the ones most sensitive to it.</p>
+
+      <h4>Stability in water</h4>
+      <p class="par">If the films dissolved when wet, the hydration-dependent impedance results would mean something different than if they took up water and stayed intact. Soaking a 100-layer CT/XG film in 200 mL of RO water and tracking bulk conductivity every minute settled it, with single-component films as controls.</p>
+      <div class="tablewrap">
+        <table class="data">
+          <caption>Bulk water conductivity (mS/cm) during soaking. The CT/XG multilayer holds steady while both single-component films release ions steeply, so the hydration-dependent impedance changes are water uptake in an intact film rather than dissolution.</caption>
+          <thead>
+            <tr><th>Time (min)</th><th>CT/XG multilayer</th><th>CT only</th><th>XG only</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>0</td><td class="stable">0.0035</td><td>0.0036</td><td>0.0049</td></tr>
+            <tr><td>1</td><td class="stable">0.0035</td><td>0.0413</td><td>0.0063</td></tr>
+            <tr><td>2</td><td class="stable">0.0035</td><td>0.0668</td><td>0.0095</td></tr>
+            <tr><td>3</td><td class="stable">0.0034</td><td>0.0667</td><td>0.0100</td></tr>
+            <tr><td>4</td><td class="stable">0.0034</td><td>0.0668</td><td>0.0100</td></tr>
+            <tr><td>5</td><td class="stable">0.0034</td><td>0.0668</td><td>0.0102</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Where it ended up</h4>
+      <p class="par">The platform runs multi-cycle CT/XG depositions on its own, with every process parameter in the recipe a measured quantity rather than a nominal one, and the procedures written up as a method another person can run. The films are confirmed by mass, contact angle, SEM/EDS and profilometry, and they have a measurable electrical signature that tracks both layer count and hydration state. The part I would defend hardest is the measurement work: most of the recent effort went into telling true material response apart from instrument limits, fixture parasitics and compensation artifacts, because a number you cannot attribute is not a result.</p>
+      <p class="tools"><span>Tools</span>Embedded C/C++ (Arduino) · closed-loop BLDC control · stepper motion and homing · TTL syringe-pump actuation · SEM/EDS · DEKTAK stylus profilometry · contact angle · Keysight E4990A impedance analyser · MATLAB analysis</p>
+    </article>
+
+    <article class="project">
+      <h3>Cross-Validating a Thin-Film Thickness Measurement</h3>
+      <p class="meta">Course project — NE 343 Microfabrication &amp; Thin-Film Technology · Spring 2026</p>
+      <p class="par"><span class="tag">Problem</span>I measured the same PECVD silicon nitride film three ways and got three answers, spanning nearly a factor of two. Any one of them, reported alone, would have been taken as the thickness — and everything downstream, including the dielectric constant of the film, scales directly with whichever one you believe.</p>
+      <p class="par"><span class="tag">Approach</span>Optical colour chart, DEKTAK stylus profilometry and spectroscopic ellipsometry disagreed. Rather than average them, I looked for evidence that did not come from any of the three. Two independent checks were available: the film's mass, weighed on the wafer before and after deposition, and the maximum capacitance of MIS devices built on the same film.</p>
+      <p class="par"><span class="tag">Result</span>The ellipsometric value of 1000 Å is the one the independent evidence supports. At that thickness the measured 1.2 mg of film over the wafer area gives a density of 2.63 g/cm³, inside the 2.5–3.1 g/cm³ range reported for PECVD nitride; at 1800 Å it gives 1.46 g/cm³, below any published value for the material. The electrical check agrees: 1000 Å yields ε<sub>r</sub> = 6.2, within the usual 6–9 for PECVD SiN<sub>x</sub>, while 1800 Å would require 11.2. The profilometer was not wrong so much as answering a different question — RIE has finite nitride-to-silicon selectivity, so the exposed silicon was etched below the original surface and the measured step contains both the film and the recess beneath it. The useful outcome is not the number but the rule: a stylus measures a step, not a film, and the two are only the same when the etch stops where you think it did.</p>
+      <figure>
+        <img src="images/thickness-methods.png" alt="Three measured thickness values on the same film plotted against the thickness range independently supported by mass and capacitance data.">
+        <figcaption>The three direct measurements against the thickness range that the mass and capacitance data independently support.</figcaption>
+      </figure>
+      <p class="tools"><span>Tools</span>Spectroscopic ellipsometry (Woollam alpha-SE) · DEKTAK stylus profilometry · reactive ion etch · gravimetric analysis</p>
+    </article>
+
+    <article class="project">
+      <h3>MIS Capacitor — Full Fabrication Flow and Electrical Test</h3>
+      <p class="meta">Course project — NE 343 Microfabrication &amp; Thin-Film Technology · Spring 2026</p>
+      <p class="par"><span class="tag">Problem</span>Build an Al/SiN<sub>x</sub>/p-Si metal–insulator–semiconductor capacitor from a bare wafer across three cleanroom sessions, and determine from its electrical behaviour what the dielectric and the interface are actually doing.</p>
+      <p class="par"><span class="tag">Approach</span>Complete flow: RCA clean, PECVD silicon nitride, contact photolithography, reactive ion etch, DC magnetron sputtered aluminium, wet etch. Then C–V at 1 MHz and I–V on nine devices in a cross-pattern, across five contact diameters and five wafer positions, so that area effects and spatial variation could be separated.</p>
+      <p class="par"><span class="tag">Result</span>C<sub>max</sub> against contact area is linear to R² ≈ 1.00, giving ε<sub>r</sub> = 6.2. From C<sub>max</sub> = 39.8 pF and C<sub>min</sub> = 15.6 pF the substrate doping works out to N<sub>a</sub> ≈ 1.1 × 10¹⁶ cm⁻³, which lands inside the wafer's specified resistivity range — an independent confirmation that the extraction is sound. The interesting part is where the device is not ideal. Flatband sits near −20 V against an ideal −0.68 V, a shift of −19.3 V corresponding to a positive fixed charge density of 6.8 × 10¹² cm⁻² in the nitride, which is what SiH<sub>4</sub>/NH<sub>3</sub> PECVD film is expected to carry. Capacitance stayed within ±3% across the wafer and leakage below 10⁻¹⁰ A out to 20 V with no breakdown: a film with a lot of fixed charge, but a spatially uniform and electrically robust one. What stayed with me was how tightly the steps couple — what you accept at develop, you pay for at etch, and then again at extraction.</p>
+      <figure>
+        <img src="images/cv-curve.png" alt="Capacitance–voltage characteristic of the 300 micrometre MIS device at 1 MHz, measured on two instruments.">
+        <figcaption>C–V characteristic of the 300 µm device at 1 MHz. The elevated capacitance through inversion, well above C<sub>min</sub>, is interface states fast enough to follow the 1 MHz signal.</figcaption>
+      </figure>
+      <p class="tools"><span>Tools</span>PECVD · DC magnetron sputtering · photolithography · reactive ion etch · C–V and I–V characterisation · four-point probe</p>
+    </article>
+
+    <article class="project">
+      <h3>Quantum-Dot LED from Synthesised Material</h3>
+      <p class="meta">Course project — Nanomaterials Synthesis Laboratory · Spring 2026</p>
+      <p class="par"><span class="tag">Problem</span>Take a nanomaterial from precursors to a device that emits light, and show that the structural measurement and the optical behaviour agree.</p>
+      <p class="par"><span class="tag">Approach</span>Synthesised CdSe quantum dots, SPIONs, and europium- and dysprosium-doped phosphors, then built a spin-cast quantum-dot LED from the CdSe. Emission was tuned by controlling growth time alone, and I correlated image-derived size distributions against measured emission using the Brus model, with magnetic response treated through Néel and Brownian relaxation.</p>
+      <p class="par"><span class="tag">Result</span>Closing the loop from particle size to device output is the part I care about — a spectrum on its own does not tell you whether you understand the material.</p>
+      <figure>
+        <img src="images/qd-vials.jpg" alt="Six vials of CdSe quantum dots under UV excitation, emitting from blue through green and yellow to red.">
+        <figcaption>The CdSe size series under UV excitation. Every vial is the same chemistry; only growth time differs, and the emission moves across the visible with particle size.</figcaption>
+      </figure>
+      <p class="tools"><span>Tools</span>Colloidal synthesis · spin coating · photoluminescence · UV-Vis · PXRD · SEM</p>
+    </article>
+  </section>
+
+  <section class="section" id="experience">
+    <h2 class="section-label">Experience</h2>
+
+    <div class="entry">
+      <div class="entry-head">
+        <h3>Undergraduate Research Assistant, Soft Matter Lab</h3>
+        <span class="when">Jan–Apr 2025 · Sept 2025–Apr 2026</span>
+      </div>
+      <p class="where">McGill University, Dept. of Chemical Engineering, Montreal, QC · Supervisor: Dr. Reghan J. Hill</p>
+      <ul>
+        <li>Wrote every operating procedure behind a deposition programme designed from scratch, leaving the process as a documented method that another person can run.</li>
+        <li>Tuned speed, acceleration, dispense volume, and drying conditions through structured parameter sweeps to reach repeatable layer-by-layer deposition.</li>
+        <li>Characterized films from 10 to 1,000 nm by SEM and EDS with DEKTAK stylus profilometry as thickness ground truth, returning per-condition thickness, roughness, and composition.</li>
+        <li>Wrote the Python and MATLAB pipelines converting raw metrology images into fitted models of film properties, validated against independent profilometry; contributing to a manuscript in preparation.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <h3>Software and Controls Engineering Co-op</h3>
+        <span class="when">May–Aug 2024</span>
+      </div>
+      <p class="where">MEDATech Engineering Services, Collingwood, ON</p>
+      <ul>
+        <li>Improved control reliability on large-scale industrial vehicles by writing and validating Structured Text (IEC 61131-3) logic in CoDeSys through iterative debug-and-validate cycles against hardware in the loop.</li>
+        <li>Worked alongside senior engineers on machines where a control fault appears in hardware, closing issues through structured test and written handover.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <h3>Waterloo Hacker Fab — Semiconductor Fabrication Design Team</h3>
+        <span class="when">Spring 2026 – present</span>
+      </div>
+      <p class="where">Open-source DIY fabrication line · sputter deposition, maskless DLP lithography, and device test</p>
+      <ul>
+        <li>Designing the in-situ thickness-measurement chain for a DIY DC magnetron sputtering system: Butterworth–Van Dyke crystal modelling, Colpitts oscillator simulation in LTspice, and Sauerbrey and Z-match conversion from frequency shift to deposited thickness.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="education">
+    <h2 class="section-label">Education</h2>
+    <div class="entry">
+      <div class="entry-head">
+        <h3>University of Waterloo — BASc Nanotechnology Engineering, Honours Co-op</h3>
+        <span class="when">Expected 2028</span>
+      </div>
+      <p class="where">Nanofabrication &amp; Nanoelectronics specialization · Waterloo, ON, Canada · 85% average, most recent term</p>
+      <ul>
+        <li>Relevant coursework: Nanoprobing &amp; Lithography · Microfabrication &amp; Thin-Film Technology · Photonics &amp; Optical Devices · Surfaces &amp; Interfaces · Probability &amp; Statistics · Micro &amp; Nanosystem Computer-Aided Design</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="skills">
+    <h2 class="section-label">Technical skills</h2>
+
+    <div class="skill">
+      <h3>Lithography &amp; patterning</h3>
+      <p>Contact photolithography: resist coat, expose, develop and pattern transfer<span class="sep">·</span>reactive ion etching, with etch selectivity traced as the root cause of a thickness-metrology error<span class="sep">·</span>PECVD silicon nitride<span class="sep">·</span>DC magnetron sputtering<span class="sep">·</span>DEKTAK stylus profilometry and spectroscopic ellipsometry for film thickness<span class="sep">·</span>cleanroom gowning and process discipline</p>
+    </div>
+    <div class="skill">
+      <h3>Metrology</h3>
+      <p>Film thickness by DEKTAK stylus profilometry, spectroscopic ellipsometry and imaging, cross-checked against weighed film mass and device capacitance<span class="sep">·</span>uniformity mapped across a device array (within ±3%)<span class="sep">·</span>AFM<span class="sep">·</span>XPS<span class="sep">·</span>FIB-SEM<span class="sep">·</span>SEM/EDS<span class="sep">·</span>MATLAB image analysis<span class="sep">·</span>impedance analysis with equivalent-circuit fitting</p>
+    </div>
+    <div class="skill">
+      <h3>Modelling &amp; simulation</h3>
+      <p>Transient lumped-parameter thermal modelling in Python<span class="sep">·</span>COMSOL Multiphysics, two-dimensional axisymmetric and full three-dimensional parametric sweeps<span class="sep">·</span>SolidWorks<span class="sep">·</span>LTspice equivalent-circuit and oscillator simulation<span class="sep">·</span>cross-validation of one model against an independent second model</p>
+    </div>
+    <div class="skill">
+      <h3>Data analysis &amp; reporting</h3>
+      <p>Statistical analysis in Python (NumPy, SciPy, Pandas, Matplotlib) and Excel<span class="sep">·</span>structured parameter sweeps across coupled process variables<span class="sep">·</span>trend, uniformity and repeatability analysis from raw tool output to plotted results<span class="sep">·</span>findings written up and presented to a supervising researcher and a design team</p>
+    </div>
+    <div class="skill">
+      <h3>Programming</h3>
+      <p>Python (NumPy, SciPy, Pandas, Matplotlib)<span class="sep">·</span>MATLAB<span class="sep">·</span>C/C++ (embedded, object-oriented)<span class="sep">·</span>LabVIEW<span class="sep">·</span>Bash and Linux automation with systemd<span class="sep">·</span>Structured Text (IEC 61131-3) in CoDeSys<span class="sep">·</span>LaTeX</p>
+    </div>
+  </section>
+
+  <footer>
+    <span class="grow">Camden da Silva · Waterloo, ON, Canada</span>
+    <a href="mailto:cdasilva@uwaterloo.ca">cdasilva@uwaterloo.ca</a>
+    <a href="https://www.linkedin.com/in/camden-da-silva-76164129b/">LinkedIn</a>
+    <a href="portfolio.pdf">Portfolio (PDF)</a>
+  </footer>
+
+</div>
+</body>
+</html>
